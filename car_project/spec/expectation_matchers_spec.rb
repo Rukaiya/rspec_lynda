@@ -80,7 +80,7 @@ describe 'Expectation Matchers' do
     end
   end
 
-  describe "collection matchers" do
+  describe 'collection matchers' do
 
     it 'will match arrays' do
       array = [1, 2, 3]
@@ -116,6 +116,28 @@ describe 'Expectation Matchers' do
 
       # color(:) syntax will convert the key to symbol, so to keep the key type rocket(=>) syntax is used
       expect(hash).not_to include({ 'a' => 1, 'c' => 3 })
+    end
+  end
+
+  describe 'predicate matchers' do
+    it 'will match be_* to custom methods ending in ?' do
+      expect([]).to be_empty
+      expect(1).to be_integer
+      expect(0).to be_zero
+      expect(1).to be_nonzero
+      expect(1).to be_odd
+      expect(0).to be_even
+    end
+
+    class Product
+      def visible?; true; end
+    end
+    product = Product.new
+
+    expect(product).to be_visible
+
+    it 'will match have_* to custom methods like has_*?' do
+      
     end
   end
 end
