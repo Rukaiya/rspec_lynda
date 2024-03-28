@@ -127,18 +127,23 @@ describe 'Expectation Matchers' do
       expect(1).to be_nonzero
       expect(1).to be_odd
       expect(0).to be_even
-    end
 
-    it 'will match have_* to custom methods like has_*?' do
-      hash = { a: 1, b: 2 }
-      expect(hash).to have_key(:a)
-      expect(hash).to have_value(2)
+      # custome methods
       class Product
         def visible?; true; end
       end
       product = Product.new
 
       expect(product).to be_visible
+      #same as
+      expect(product.visible?).to be true
+    end
+
+    it 'will match have_* to custom methods like has_*?' do
+      hash = { a: 1, b: 2 }
+      expect(hash).to have_key(:a)
+      expect(hash).to have_value(2)
+
 
       class Customer
         def has_pending_order?; true; end
@@ -147,6 +152,24 @@ describe 'Expectation Matchers' do
       customer = Customer.new
       expect(customer).to have_pending_order
       expect(customer.has_pending_order?).to be true  #same
+    end
+  end
+
+  describe 'observation matchers' do
+    it 'will match when events change object attributes' do
+
+    end
+
+    it 'will match when events change any values' do
+
+    end
+
+    it 'will match when errors are raised' do
+
+    end
+
+    it 'will match when output is generated' do
+
     end
   end
 end
